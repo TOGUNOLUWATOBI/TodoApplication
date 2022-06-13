@@ -44,6 +44,20 @@ public class App
     static ObjectMapper mapper = new ObjectMapper();
 
 
+    /***
+     * for fast data access
+     * */
+
+    static {
+        try {
+            UserDao.readAll();
+            TodoDao.readAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void main( String[] args ) throws IOException {
 
         boolean quitter=false;
@@ -72,6 +86,8 @@ public class App
             }
 
         }
+        UserDao.commit();
+        TodoDao.commitTodo();
     }
 
     private static int homeOptions() {
